@@ -1,0 +1,45 @@
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 1;
+  clip-path: none;
+}
+.dark::view-transition-new(root) {
+  z-index: 999;
+  clip-path: var(--view-transition-clip-path);
+  transition-duration: 0.5s;
+}
+
+::view-transition-old(root) {
+  z-index: 999;
+  clip-path: var(--view-transition-clip-path);
+  transition-duration: 0.5s;
+}
+::view-transition-new(root) {
+  z-index: 1;
+  clip-path: none;
+}
+
+html {
+  background-color: #e9e4d4;
+}
+html.dark {
+  background-image: linear-gradient(125deg, #0078d4, #a1c4fd, #c2e9fb, #c2ffd8);
+  background-size: 300%;
+  animation: bganimation 30s infinite;
+}
+@keyframes bganimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

@@ -1,0 +1,15 @@
+$textColor: red;
+
+@mixin flexAllCenter() {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexAllColumnCenter() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

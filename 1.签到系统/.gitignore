@@ -1,0 +1,6 @@
+desktop/node_modules
+desktop/release/*
+!desktop/release/签到系统_用户端 Setup 0.0.0.exe
+
+server/node_modules
+server/files/student.txt

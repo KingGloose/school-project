@@ -1,0 +1,296 @@
+/* S 导航栏-网站图标-左边 */
+.ic_main img {
+  width: 40px;
+  height: 40px;
+  margin-top: -3px;
+}
+/* E 导航栏-网站图标-左边 */
+
+/* S 导航栏按钮 */
+/* 当页面缩小到md的时候，就会出现的按钮，消除这个按钮四周的边框 */
+.nav_button {
+  border: 0px;
+}
+/* E 导航栏按钮 */
+
+/* S 导航栏按钮 */
+.nav_don {
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  cursor: pointer;
+}
+/* E 导航栏按钮 */
+
+/* S 导航栏按钮-三条线设置 */
+.nav_don span {
+  width: 30px;
+  height: 5px;
+  border-radius: 4px;
+  background-color: cornflowerblue;
+
+  position: absolute;
+
+  transition: 0.5s;
+}
+.nav_don span:nth-child(1) {
+  width: 20px;
+  transform: translateY(-10px);
+
+  left: 5px;
+}
+.nav_don span:nth-child(2) {
+  transform: translateY(0px);
+}
+.nav_don span:nth-child(3) {
+  width: 25px;
+  transform: translateY(10px);
+
+  left: 5px;
+}
+/* E 导航栏按钮-三条线设置 */
+
+/* S 导航栏按钮-三条线设置-动画设置 */
+.nav_don.active span:nth-child(1) {
+  width: 30px;
+  transform: translateY(0px) rotate(45deg);
+}
+.nav_don.active span:nth-child(2) {
+  transform: translateX(100px);
+}
+.nav_don.active span:nth-child(3) {
+  width: 30px;
+  transform: translateY(0px) rotate(315deg);
+}
+/* E 导航栏按钮-三条线设置-动画设置 */
+
+/* S 导航栏-导航按钮 */
+/* 设置按钮的右移 然各个按钮保持距离 */
+.nav_center {
+  margin-left: auto;
+}
+.nav_center li {
+  margin-right: 20px;
+}
+/* E 导航栏-导航按钮 */
+
+/* S 导航栏中间部分-icon图标设置 */
+.nav_center_home img {
+  width: 20px;
+  height: 20px;
+  margin-top: -4px;
+  margin-left: 4px;
+}
+.nav_center_cat img {
+  width: 24px;
+  height: 24px;
+}
+.nav_center_curing img {
+  width: 23px;
+  height: 23px;
+  margin-top: -6px;
+}
+.nav_center_history img {
+  width: 24px;
+  height: 24px;
+  margin-top: -4px;
+}
+.nac_center_more img {
+  width: 22px;
+  height: 22px;
+  margin-top: -2px;
+}
+/* E 导航栏中间部分-icon图标设置 */
+
+/* S 导航栏中间部分-悬浮动画 */
+.nav_center a {
+  border-radius: 10px;
+}
+.nav_center a:hover {
+  background-color: #9a9a9f;
+}
+/* E 导航栏中间部分-悬浮动画 */
+
+/* S 巨幕下文字-"这不是什么正经的网站" */
+.jumbotron_bottom_text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 19px;
+  color: #999;
+}
+.jumbotron_bottom_text img {
+  width: 27px;
+  height: 27px;
+}
+/* E 巨幕下文字-"这不是什么正经的网站" */
+
+/* S 每个分区开头文字 */
+.cat_top_text {
+  text-align: center;
+}
+.cat_top_text_con {
+  text-align: center;
+  color: #999;
+}
+/* E 每个分区开头文字 */
+
+/* S 猫猫换行部分-文字颜色变化 */
+.nav_tabs_text {
+  position: relative;
+}
+.nav_tabs_text a {
+  color: #000000;
+}
+.nav_tabs_text a:hover {
+  color: #007bff;
+}
+.nav_tabs_text .more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #007bff;
+  transition: 200ms all ease;
+
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+.nav_tabs_text .more:hover {
+  text-decoration: none;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+/* E 猫猫换行部分-文字颜色变化 */
+
+/* S 养护里面的图片 */
+.eat_img img {
+  width: 280px;
+}
+/* E 养护里面的图片 */
+
+/* S 历史部分 */
+.main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* E 历史部分 */
+
+/* S 历史部分各个盒子的设置 */
+.box {
+  width: 305px;
+  height: 300px;
+  margin: 10px;
+  background-color: rgba(173, 173, 173, 0.3);
+  position: relative;
+  top: 0px;
+  left: 0px;
+
+  border-radius: 20px;
+  border: 0px;
+}
+.icon_one {
+  background-color: #af5f43;
+}
+.icon_two {
+  background-color: #643abf;
+}
+.icon_three {
+  background-color: #dea614;
+}
+.icon_four {
+  background-color: #2161ad;
+}
+.icon_five {
+  background-color: #bf47b4;
+}
+.icon_six {
+  background-color: #c0d127;
+}
+/* E 历史部分各个盒子的设置 */
+
+/* S 历史部分内容设置 */
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  margin-top: 100px !important;
+  transform: scale(0);
+  transition-delay: 0.25s;
+}
+/* E 历史部分内容设置 */
+
+/* S 历史部分内容设置-动画 */
+.box:hover .content {
+  transform: scale(1);
+}
+/* E 历史部分内容设置-动画 */
+
+/* S 历史部分头像设置 */
+.icon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+  border-radius: 20px;
+}
+.icon img {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: calc(50% - 40px);
+}
+/* E 历史部分头像设置 */
+
+/* S 历史部分头像设置-动画 */
+.box:hover .icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  top: 10px;
+  left: calc(50% - 40px);
+}
+/* E 历史部分头像设置-动画 */
+
+/* S 底部文字部分 */
+.main_card_two {
+  margin-bottom: 70px;
+}
+.text_bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+/* E 底部文字部分 */
+
+/* S 鼠标移动到图片上，图片扩大 */
+.don_img {
+  cursor: pointer;
+  transition: 0.4s;
+}
+.don_img:hover {
+  transform: scale(1.02);
+}
+/* E 鼠标移动到图片上，图片扩大 */
+
+.container .link {
+  display: flex;
+  justify-content: center;
+}
+.container .link a {
+  transition: all 200ms ease;
+}
+.container .link a:hover {
+  text-decoration: none;
+  transform: scale(1.1);
+}

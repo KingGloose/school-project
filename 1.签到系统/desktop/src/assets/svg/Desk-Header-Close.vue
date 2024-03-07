@@ -1,0 +1,31 @@
+<template>
+  <svg
+    t="1699801179459"
+    class="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="7808"
+    :width="width"
+    :height="height"
+  >
+    <path
+      d="M576 512l277.333333 277.333333-64 64-277.333333-277.333333L234.666667 853.333333 170.666667 789.333333l277.333333-277.333333L170.666667 234.666667 234.666667 170.666667l277.333333 277.333333L789.333333 170.666667 853.333333 234.666667 576 512z"
+      :fill="color"
+      p-id="7809"
+    ></path>
+  </svg>
+</template>
+
+<script setup lang="ts">
+type PropsType = {
+  width?: string;
+  height?: string;
+  color?: string;
+};
+withDefaults(defineProps<PropsType>(), {
+  width: "30",
+  height: "30",
+  color: "#000"
+});
+</script>

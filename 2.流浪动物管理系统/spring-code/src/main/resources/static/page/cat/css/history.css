@@ -1,0 +1,18 @@
+.cat_profile {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  width: 1035px;
+  overflow: hidden;
+}
+.cat_profile img {
+  margin: 10px 15px 10px 65px;
+  float: left;
+}
+.cat_profile p {
+  text-indent: 32px;
+  line-height: 25px;
+  font-size: 16px;
+  text-align: left;
+  margin-left: 65px;
+}
