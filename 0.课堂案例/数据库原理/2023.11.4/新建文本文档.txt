@@ -1,0 +1,65 @@
+-- 1、为表supplier的字段SupppelierName创建一个非聚集、唯一索引
+create unique nonclustered index Supplier_SupplierName_index on supplier(SupplierName);
+
+-- 2、使用系统存储过程Sp_helpindex查看表supplier的索引情况，如果已有主码，能否为其再建立一个聚集索引？为什么？
+EXEC sp_helpindex 'supplier';
+
+-- 3、删除第1题中所建立的索引。
+drop index supplier.Supplier_SupplierName_index;
+EXEC sp_helpindex 'supplier';
+
+-- 4、写出创建满足下述要求的视图的SQL语句
+-- (1) 统计每个学生的消费金额
+create view studentExposeView as (
+	select Student.SName, Student.SNO, sum(sb.Number * gd.SalePrice) as Price from Student
+	left join SaleBill sb on sb.SNO = Student.SNO
+	left join Goods gd on sb.GoodsNO = gd.GoodsNO
+	group by Student.SNO, Student.SName
+);
+select * from studentExposeView;
+
+-- (2) 统计每个供货商提供的商品种类（一个商品编号代表一种）
+create view goodsCategoryView as (
+	select Supplier.SupplierNO, Supplier.SupplierName, Category.CategoryNO, CategoryName from Supplier
+	left join Goods on Goods.SupplierNO = Supplier.SupplierNO
+	left join Category on Category.CategoryNO = Goods.CategoryNO
+)
+select * from goodsCategoryView;
+drop view goodsCategoryView
+
+-- (3) 统计各商品种类的销售数量及平均售价
+CREATE VIEW goods_sale AS (
+	SELECT c.CategoryNO,c.CategoryName,SUM(g.Number) num,AVG(g.SalePrice) avg FROM category c 
+	LEFT JOIN goods g ON c.CategoryNO = g.CategoryNO
+	GROUP BY c.CategoryNO,c.CategoryName
+)
+DESC goods_sale;
+SELECT * FROM goods_sale;
+
+-- (4) 建立Sup001供货商的商品信息视图，并要求通过视图完成修改与插入操作时视图仍只有Sup001供货商的商品
+CREATE VIEW Sup001SupplierGoodsViews as SELECT * from Goods WHERE SupplierNo = 'Sup001' WITH CHECK OPTION;
+select * from Sup001SupplierGoodsViews;
+
+-- 5、利用上述视图，完成如下任务
+-- (1) 统计每个MIS专业学生的消费金额。
+select sev.SName, sev.SNO, sum(SaleBill.Number * Goods.SalePrice) as Price from studentExposeView as sev
+join Student on Student.SNO = sev.SNO and Student.Major = 'MIS'
+left join SaleBill on SaleBill.SNO = Student.SNO
+left join Goods on Goods.GoodsNO = SaleBill.GoodsNO
+group by sev.SName, sev.SNO
+
+-- (2) 查询售价低于该商品种类售价平均价的商品名和售价。
+select g.GoodsName,g.SalePrice from goods g
+left join goods_sale gs on g.CategoryNO = gs.CategoryNO
+where g.SalePrice < gs.avg;
+
+-- (3) 利用第4题(4)中的视图插人供货商Sup002的商品信息，结果如何？为什么？
+select * from Sup001SupplierGoodsViews;
+insert into Sup001SupplierGoodsViews values('GN001', 'Sup002', 'CN001', '麦氏威尔冰咖啡', null, 5, 9, 30, '2023-11-04 12:00:00', 19);
+
+-- (4) 利用第4题(4)中的视图删除GN0004的商品信息，结果如何？为什么？
+
+
+-- (5) 查询供货种类大于等于2的供货商的名称及数量.
+select SupplierNO, SupplierName, count(*) as num from goodsCategoryView gcv
+group by SupplierNO, SupplierName having count(*) >= 2

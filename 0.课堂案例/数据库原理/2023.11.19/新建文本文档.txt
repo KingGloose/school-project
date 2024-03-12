@@ -1,0 +1,73 @@
+-- 添加新品“GN0011 Sup002 CN001 乐至三合一咖啡 12.30 17.30 100 2018-11-12 18
+insert into Goods values('GN0011', 'Sup002', 'CN001', '乐至三合一咖啡', null, 12.30, 17.30, 100, '2018-11-12', 18);
+select * from Goods;
+
+
+-- 先建立一张新表，使用子查询将各月的销售额插入该表，存储月份及销售额
+create table SaleMonth (
+	month char(6),
+	sales decimal(10,2)
+)
+insert into SaleMonth
+select sum(SaleBill.Number * SalePrice) as sale, month(SaleBill.HappenTime) as month from SaleBill 
+left join Goods on Goods.GoodsNO = SaleBill.GoodsNO
+group by month(SaleBill.HappenTime)
+
+select * from SaleMonth;
+
+
+-- 使用子查询将各学生的购买额插入新表，由系统自建新表，存储学生学号、姓名、销售额
+select StudentPrice.* into StudentPrice from (
+	select sev.SName, sev.SNO, sum(SaleBill.Number * Goods.SalePrice) as Price from studentExposeView as sev
+	join Student on Student.SNO = sev.SNO
+	left join SaleBill on SaleBill.SNO = Student.SNO
+	left join Goods on Goods.GoodsNO = SaleBill.GoodsNO
+	group by sev.SName, sev.SNO
+) as StudentPrice
+select * from StudentPrice;
+
+-- 将所有商品存量增加2
+update Goods set Number += 2;
+select * from Goods
+
+-- 将保质期还有30天的商品价格打8折
+update Goods set SalePrice *= 0.8 where QGPeriod <= 30
+
+-- 分别使用子查询方式与连接方式将广州地区供货商的商品加价10%
+-- 子查询
+update Goods set InPrice *= (1 + 0.1) where SupplierNO in (
+	select SupplierNO from Supplier where Address like '%广州%'
+)
+
+-- 连接查询
+update Goods set InPrice *= (1 + 0.1) from Supplier join Goods on Supplier.SupplierNO = Goods.SupplierNO
+where Address like '%广州%'
+
+-- 连接查询 + 子查询
+update goods set InPrice *= (1 + 0.1) where GoodsNo in (
+	select GoodsNO from Goods left join Supplier on Goods.SupplierNO = Supplier.SupplierNO where Address like '%广州%'
+)
+
+-- 将销售额后两位的商品下架
+delete from Goods where GoodsNO in (
+	select top 2 GoodsNO from (
+		select Goods.GoodsNo, GoodsName, sum(SaleBill.Number * Goods.SalePrice) as totalSale from Goods 
+		left join SaleBill on SaleBill.GoodsNO = Goods.GoodsNO 
+		group by Goods.GoodsNo, GoodsName
+	) as sub 
+	where totalSale is not null order by totalSale asc
+)
+
+-- 删除销售额最小的供应商信息
+delete from Supplier where SupplierNO in (
+	select top 1 Supplier.SupplierNO from Supplier
+	left join Goods on Goods.SupplierNO = Supplier.SupplierNO
+	left join SaleBill on SaleBill.GoodsNO = Goods.GoodsNO
+	group by Supplier.SupplierNO
+	order by sum(SaleBill.Number * Goods.SalePrice)
+)
+
+
+
+
+

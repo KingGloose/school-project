@@ -1,0 +1,99 @@
+-- 1.查询商品种类信息。
+select * from Category;
+
+-- 2.查询 IT专业 所有学生信息。
+select * from student where Major = 'IT';
+
+-- 3.查询MIS专业年龄小于20 岁的学生信息。并为 MIS列取别名为“信息管理系统”
+select SNO, SName, BirthYear, Ssex, College, Major as '信息管理系统', WeiXin from Student 
+where Major = 'MIS' and (YEAR(GETDATE()) - BirthYear) < 30;
+
+-- 4.查询利润率大于 30%的商品编号与商品名。
+select GoodsNo, GoodsName from Goods where (SalePrice - InPrice) / InPrice > 0.3
+
+-- 5.查询广州佛山供应的商品信息。
+select * from Goods where Goods.SupplierNO = (
+	select SupplierNO from Supplier where Address = '广州佛山'
+)
+
+-- 6.查询购买了商品种类为咖啡的 MIS专业的学生信息
+select distinct Student.* from Student
+inner join SaleBill on Student.SNO = SaleBill.SNO
+inner join Goods on SaleBill.GoodsNO = Goods.GoodsNO
+inner join Category on Goods.CategoryNO = Category.CategoryNO
+where Category.CategoryName = '咖啡' and Student.Major = 'MIS';
+
+-- 7.查询购买了商品种类为咖啡的各专业的学生人数
+select Student.Major, count(DISTINCT Student.SNO) as scount 
+from Student
+inner join SaleBill on Student.SNO = SaleBill.SNO
+inner join Goods on SaleBill.GoodsNO = Goods.GoodsNO
+inner join Category on Goods.CategoryNO = Category.CategoryNO
+where Category.CategoryName = '咖啡' 
+GROUP BY Student.Major
+
+-- 8.查询购买各商品种类的各专业的学生人数
+select Category.CategoryName ,Student.Major, count(DISTINCT Student.SNO) as scount 
+from Student
+inner join SaleBill on Student.SNO = SaleBill.SNO
+inner join Goods on SaleBill.GoodsNO = Goods.GoodsNO
+inner join Category on Goods.CategoryNO = Category.CategoryNO
+GROUP BY Student.Major, Category.CategoryName
+
+-- 9.查询从未购买过商品的学生信息。
+select * from Student where Student.SNO not in(
+	select distinct SNO from SaleBill
+)
+
+-- 10.查询与商品编号GNO005 相同产地的商品编号、商品名
+select GoodsNO, GoodsName from Goods where Goods.SupplierNO in (
+	select Goods.SupplierNO from Goods where Goods.GoodsNO = 'GN0005'
+) and GoodsNO <> 'GN0005'
+
+-- 11.使用派生表查询各供应商的存货量。
+select G.GoodsNO, G.GoodsName, S.SupplierName, G.number from Goods as G
+left join Supplier as S on G.SupplierNO = S.SupplierNO order by SupplierName
+
+select Supplier. SupplierNO, SupplierName, kc.Number from Supplier join (
+	select SupplierNO, sum(Number) from Goods group by SupplierNO
+) as kc(SupplierNO, Number)
+on Supplier.SupplierNO=kc.SupplierNO
+
+
+-- 12.查询售价大于该种类商品售价均值的商品号、商品名
+select Goods.GoodsNO, Goods.GoodsName 
+from (
+	select CategoryNO, avg(SalePrice) as SPAvg from Goods group by CategoryNO
+) as GAVG , Goods 
+where GAVG.CategoryNO = Goods.CategoryNO and GAVG.SPAvg < Goods.SalePrice
+
+-- 13.分别用子查询与连接查询查询购买了商品编号为“GN0003”和“GNO007”的学生学号与姓名。
+-- 子查询
+select SNO, SName from Student where SNO in (
+	select distinct SaleBill.SNO from SaleBill where GoodsNO = 'GN0003' or GoodsNO = 'GN0007'
+)
+-- 连接查询
+select distinct Student.SNO, Student.SName from Student inner join SaleBill on 
+	(GoodsNO = 'GN0003' or GoodsNO = 'GN0007') and Student.SNO = SaleBill.SNO 
+
+-- 14.查询各校销售额。
+select College, sum(Sale.TotaolSale) as '销售额' from (
+	select SaleBill.SNO, SalePrice * SaleBill.Number as TotaolSale from SaleBill 
+	inner join Goods on Goods.GoodsNO = SaleBill.GoodsNO
+) as Sale inner join Student on Student.SNO = Sale.SNO
+group by College
+
+-- 15.查询购买额前三的校名、专业名
+select top 3 College, Student.Major, sum(Sale.TotaolSale) as '销售额' from (
+	select SaleBill.SNO, SalePrice * SaleBill.Number as TotaolSale from SaleBill 
+	inner join Goods on Goods.GoodsNO = SaleBill.GoodsNO
+) as Sale inner join Student on Student.SNO = Sale.SNO
+group by College, Major order by '销售额' desc
+
+
+-- 16.使用集合查询方式查询生产日期早于 2018-1-1 或库存量小于 30的商品信息
+select * from Goods where ProductTime < '2018-1-1'
+union 
+select * from Goods where Number < 30
+
+

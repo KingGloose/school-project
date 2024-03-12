@@ -1,0 +1,188 @@
+INSERT INTO Category VALUES('CN004','毛巾','洗脸巾、浴巾');
+INSERT INTO Category VALUES('CN005','白酒','浓香型、酱香型、清香型');
+INSERT INTO Category VALUES('CN006','饼干','苏打饼干、曲奇饼干、威化饼干');
+
+INSERT INTO Goods VALUES ('GN0012','Sup001','CN004','洁丽雅Grace毛巾',null,5.20,10.25,20,GETDATE(),18);
+INSERT INTO Goods VALUES ('GN0013','Sup002','CN004','三利毛巾',null,7.30,10.25,25,GETDATE(),18);
+INSERT INTO Goods VALUES ('GN0014','Sup001','CN004','全棉时代毛巾',null,4.70,10.25,16,GETDATE(),18);
+INSERT INTO Goods VALUES ('GN0015','Sup003','CN005','茅台',null,1888.88,3888.88,10,GETDATE(),36);
+INSERT INTO Goods VALUES ('GN0016','Sup003','CN005','剑南春',null,799.90,1799.99,8,GETDATE(),36);
+INSERT INTO Goods VALUES ('GN0017','Sup002','CN005','四特酒',null,366.60,666.66,6,GETDATE(),36);
+INSERT INTO Goods VALUES ('GN0018','Sup002','CN006','奥利奥',null,5.80,12.00,60,GETDATE(),18);
+INSERT INTO Goods VALUES ('GN0019','Sup001','CN006','好吃点',null,3.20,5.50,40,GETDATE(),18);
+INSERT INTO Goods VALUES ('GN0020','Sup001','CN006','趣多多',null,6.60,10.00,30,GETDATE(),18);
+
+
+-- 自定义数据类型GoodID_type，用于描述商品的编号
+create type GoodID_type from varchar(20) NOT NULL;
+
+-- 在supermarket数据库中创建表good，表结构与goods类似，而GoodsNO的数是类型为自定义数据类型GoodID_type
+SELECT * INTO Good FROM Goods WHERE 1 = 0;
+alter table Good ALTER COLUMN GoodsNO GoodID_type;
+sp_help Good;
+
+-- 创建一个局部变量goods_type，并在SELECT语句中使用该变量查找商品表中有毛巾类商品的名称和售价
+DECLARE @goods_type NVARCHAR(50);
+SET @goods_type = '毛巾';
+select GoodsName, SalePrice from Goods where CategoryNo in (
+	select CategoryNO from Category where CategoryName = @goods_type
+)
+
+-- 判断商品表goods是否存在商品类型为 “白酒” 的商品，如果存在则显示该类到有商品信息，否则显示无此类商品
+CREATE PROCEDURE CheckWhiteWineGoods
+AS
+BEGIN
+    DECLARE @Count int;
+    DECLARE @CategoryID varchar(20);
+
+    SELECT @CategoryID = CategoryNO
+    FROM Category
+    WHERE CategoryName = '白酒';
+
+    SELECT @Count = COUNT(*)
+    FROM Goods
+    WHERE CategoryNO = @CategoryID;
+
+    IF @Count > 0
+    BEGIN
+        -- 存在白酒类商品
+        SELECT GoodsName, SalePrice
+        FROM Goods
+        WHERE CategoryNO = @CategoryID;
+    END
+    ELSE
+    BEGIN
+        -- 不存在白酒类商品
+        PRINT '无白酒类商品信息';
+    END
+END;
+EXEC CheckWhiteWineGoods;
+
+-- 如果商品表goods中存在商品数量小于10的情况，则将所有商品数量增加10，反复执行直到所有商品的数量都不小于10为止
+select * from Goods
+create procedure AddNumberGoods
+as 
+begin
+	while exists (select 1 from Goods where Number < 10)
+	begin
+		update Goods set Number = Number + 10;
+	end
+end;
+exec AddNumberGoods;
+select * from Goods
+	
+-- 声明一个游标，用于对 “饼干” 类商品的售价降价5%
+declare DiscountCursor cursor for
+select GoodsNO, SalePrice from Goods where CategoryNO = (
+	select CategoryNO from Category where CategoryName = '饼干'
+)
+
+DECLARE @GoodsID varchar(20), @SalePrice DECIMAL(10, 2);
+open DiscountCursor;
+fetch next from DiscountCursor INTO @GoodsID, @SalePrice
+
+while @@FETCH_STATUS = 0
+begin
+    UPDATE Goods
+    SET SalePrice = @SalePrice * 0.95
+    WHERE GoodsNO = @GoodsID;
+
+	print @GoodsID + ':' + CAST(@SalePrice AS NVARCHAR(255));
+
+    FETCH NEXT FROM DiscountCursor INTO @GoodsID, @SalePrice;
+END
+
+CLOSE DiscountCursor;
+DEALLOCATE DiscountCursor;
+
+-- 创建一个有输入参数的存储过程，用于查询指定类别的所有商品信息。并执行该存储过程
+create procedure getGoodInfo
+	@name varchar(50)
+as
+begin
+	select * from Goods where CategoryNO = (
+		select CategoryNO from Category where CategoryName = @name
+	);
+end;
+EXEC getGoodInfo @name = '饼干';
+
+-- 创建一个有输入输出参数的存储过程，用于查询指定商品名的售价。并执行试存过程。
+create procedure getGoodSalePrice
+	@name varchar(50),
+	@sale DECIMAL(10, 2) output
+as
+begin
+	select @sale = SalePrice from Goods where GoodsName = @name;
+end;
+
+declare @outSale DECIMAL(10, 2);
+exec getGoodSalePrice @name = '三利毛巾', @sale = @outSale output;
+SELECT '售价为: ' + CAST(@outSale AS NVARCHAR(20)) AS OutputMessage;
+
+
+-- 创建自定义函数，用于统计销售表salebill中某段时间内的销售情况。并调用该函数输出执行结果。
+
+create function SaleStatusByTimeFun
+	(
+		@start varchar(50),
+		@end varchar(50)
+	)
+returns table
+as
+return 
+(
+	select TotalSale = sum(SaleBill.Number * SalePrice) from Goods left join SaleBill on 
+	HappenTime >= @start and HappenTime <= @end and SaleBill.GoodsNO = Goods.GoodsNO
+);
+select * from dbo.SaleStatusByTimeFun('2017-02-08', '2020-02-08');
+
+
+-- 创建自定义函数，用于显示商品表goods中售价大于指定价格的商品信息，并调用该函数输出执行结果。
+CREATE FUNCTION GetGoodsByPrice
+    (@MinSalePrice DECIMAL(10, 2))
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT *
+    FROM Goods
+    WHERE SalePrice > @MinSalePrice
+);
+
+SELECT * FROM dbo.GetGoodsByPrice(100.00);
+
+
+-- 创建一个触发器，向销售表salebill中插人一条记录时，这个触发器将更新商品表goods。
+-- goods表中数量为原有数量减去销售数量，如果库存数量小于10，则提示 “该商品数量小于10，低于安全库存量，请及时进货物” ；
+-- 如果原有数量不足，则提示 “数量不足！”
+CREATE TRIGGER UpdateGoodsOnSale
+ON SaleBill
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- 更新商品表中的库存数量
+    UPDATE Goods
+    SET Number = Goods.Number - i.Number
+    FROM Goods
+    INNER JOIN inserted i ON Goods.GoodsNO = i.GoodsNO;
+
+    -- 检查库存数量是否低于10
+    IF EXISTS (SELECT 1 FROM Goods WHERE Number < 10)
+    BEGIN
+        PRINT '该商品数量小于10，低于安全库存量，请及时进货。';
+    END
+
+    -- 检查原有数量是否不足
+    IF EXISTS (SELECT 1 FROM Goods g INNER JOIN inserted i ON g.GoodsNO = i.GoodsNO WHERE g.Number < 0)
+    BEGIN
+        PRINT '数量不足。';
+    END
+END;
+
+insert into SaleBill values('GN0017', 'SO1', GETDATE(), 3);
+select * from Goods
+
+
+

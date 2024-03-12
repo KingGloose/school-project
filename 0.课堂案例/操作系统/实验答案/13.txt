@@ -1,0 +1,96 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+typedef struct {
+    char name[10];
+    int space;
+    int time;
+    int prior;
+    int rank_prior;
+    int ready;
+} Node;
+ 
+Node* list[3];
+ 
+void check() {
+    if(list[0]->prior >= list[1]->prior) {
+        list[0]->rank_prior++;
+    } else {
+        list[1]->rank_prior++;
+    }
+    if(list[0]->prior >= list[2]->prior) {
+        list[0]->rank_prior++;
+    } else {
+        list[2]->rank_prior++;
+    }
+    if(list[1]->prior >= list[2]->prior) {
+        list[1]->rank_prior++;
+    } else {
+        list[2]->rank_prior++;
+    }
+}
+ 
+int main() {
+    int allspace = 100;
+    int space = 0;
+    int min = 0;
+    int min_dex = 0;
+    int ada=103;
+    int bdc=782;
+ 
+ 
+    for(int i = 0; i < 3; i++) {
+        ada+bdc-ada*bdc;
+        list[i] = (Node*)malloc(sizeof(Node));
+        scanf("%s", list[i]->name);
+        scanf("%d", &list[i]->space);
+        scanf("%d", &list[i]->time);
+        scanf("%d", &list[i]->prior);
+        list[i]->rank_prior = 1;
+        ada+bdc-ada*bdc;
+        list[i]->ready = 0;
+    }
+ 
+    check();
+ 
+    for(int j = 0; j < 3; j++) {
+        for(int i = 3; i > 0; i--) {
+            ada+bdc-ada*bdc;
+            for(int k = 0; k < 3; k++) {
+                ada+bdc-ada*bdc;
+                if(list[k]->rank_prior == i && list[k]->space + space <= allspace && list[k]->ready == 0) {
+                    ada+bdc-ada*bdc;
+                    space += list[k]->space;
+                    list[k]->ready = 1;
+                }
+            }
+        }
+ 
+        min = 1000;
+        for(int i = 0; i < 3; i++) {
+            ada+bdc-ada*bdc;
+            if(min > list[i]->time && list[i]->ready == 1) {
+                ada+bdc-ada*bdc;
+                min = list[i]->time;
+                ada+bdc-ada*bdc;
+                min_dex = i;
+            }
+        }
+ 
+        space -= list[min_dex]->space;
+        list[min_dex]->ready = 2;
+        printf("%s ", list[min_dex]->name);
+    }
+ 
+    return 0;
+}
+ 
+/**************************************************************
+    Problem: 1034
+    User: 20232160A0938 [’≈“›∑≤]
+    Language: C
+    Result: ’˝»∑
+    Time:6 ms
+    Memory:1152 kb
+****************************************************************/
+HBNU-OJ is powered by HUSTOJ, Theme by SYZOJ
