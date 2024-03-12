@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 引入Hibernate映射配置文件约束头 -->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 映射关系配置文件：配置实体类对象与数据库表之间的映射 -->
+    <class name="com.hbnu.pojo.User" table="tb_user">
+        <!--主键映射
+            name:表示实体类中唯一的属性名
+            column:数据库表中的字段，column属性可以省略，如果省略，则生成的数据库库表字段名和实体类中的属性名一致
+        -->
+        <id name="uid" column="id">
+            <generator class="native"/> <!--主键生成策略-->
+        </id>
+
+        <!--其他属性映射-->
+        <property name="username" column="name"/>
+        <property name="password"/>
+        <property name="address" column="addr"/>
+        <property name="salary" column="salary"/>
+    </class>
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
