@@ -1,74 +1,101 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--    配置Bean对象-->
-    <!--    <bean id="userService" class="com.hbnu.service.UserService"/>-->
+<!--    配置Bean对象-->
+<!--    <bean id="userService" class="com.hbnu.service.UserService"/>-->
 
-    <!--    通过静态工厂模式管理Bean对象（Bean对象创建）-->
-    <!--    <bean id="userFactory" class="com.hbnu.factory.UserFactory" factory-method="getUserService"/>-->
+<!--    通过静态工厂模式管理Bean对象（Bean对象创建）-->
+<!--    <bean id="userFactory" class="com.hbnu.factory.UserFactory" factory-method="getUserService"/>-->
 
-    <!--    通过实例工厂模式管理Bean对象（Bean对象创建）-->
-    <!--    <bean id="userFactory" class="com.hbnu.factory.UserFactory"/>-->
-    <!--    <bean id="userService" factory-bean="userFactory" factory-method="getUserService"/>-->
+<!--    通过实例工厂模式管理Bean对象（Bean对象创建）-->
+<!--<bean id="userFactory" class="com.hbnu.factory.UserFactory"/>-->
+<!--<bean id="userService" factory-bean="userFactory" factory-method="getUserService"/>-->
 
-    <!--    属性注入-->
-    <!--    1.1、通过有参构造方式注入属性值-->
-    <!--    <bean id="user" class="com.hbnu.pojo.User">-->
-    <!--        <constructor-arg name="username" value="李白———乘风破浪会有时，直挂云帆济沧海"/>-->
-    <!--    </bean>-->
+<!--    属性注入-->
+<!--    1.1、通过有参构造方式注入属性值-->
+<!--    <bean id="user" class="com.hbnu.pojo.User">-->
+<!--        <constructor-arg name="username" value="李白———乘风破浪会有时，直挂云帆济沧海"/>-->
+<!--    </bean>-->
 
-    <!--    1.2、通过setter方法的方式注入属性值-->
-    <!--      <bean id="user" class="com.hbnu.pojo.User">-->
-    <!--          <property name="username" value="陆游———夜阑卧听风吹雨，铁马冰河入梦来"/>-->
-    <!--      </bean>-->
+<!--    1.2、通过setter方法的方式注入属性值-->
+<!--      <bean id="user" class="com.hbnu.pojo.User">-->
+<!--          <property name="username" value="陆游———夜阑卧听风吹雨，铁马冰河入梦来"/>-->
+<!--      </bean>-->
 
-    <!--    注入引用类型-->
-    <bean id="userDoo" class="com.hbnu.dao.UserDao"/>
-    <bean id="userService" class="com.hbnu.service.UserService">
-        <property name="userDao" ref="userDoo"/>
-    </bean>
+<!--    注入引用类型-->
+<!--    <bean id="userDoo" class="com.hbnu.dao.UserDao"/>-->
+<!--    <bean id="userService" class="com.hbnu.service.UserService">-->
+<!--        <property name="userDao" ref="userDoo"/>-->
+<!--    </bean>-->
 
-    <!--    注入复杂类型-->
-    <bean id="dataType" class="com.hbnu.pojo.DataType">
-        <!--1.1、注入数组类型-->
-        <property name="arrs">
-            <list>
-                <value>陶渊明</value>
-                <value>刘禹锡</value>
-                <value>辛弃疾</value>
-                <value>欧阳修</value>
-            </list>
-        </property>
+<!--    注入复杂类型-->
 
-        <!--1.2、注入list集合类型-->
-        <property name="lists">
-            <list>
-                <value>李清照</value>
-                <value>鱼幼薇</value>
-                <value>蔡文姬</value>
-            </list>
-        </property>
+<!--    <bean id="dataType" class="com.hbnu.pojo.DataType">-->
+<!--        &lt;!&ndash;1.1、注入数组类型&ndash;&gt;-->
+<!--        <property name="arrs">-->
+<!--            <list>-->
+<!--                <value>陶渊明</value>-->
+<!--                <value>刘禹锡</value>-->
+<!--                <value>辛弃疾</value>-->
+<!--                <value>欧阳修</value>-->
+<!--            </list>-->
+<!--        </property>-->
 
-        <!--1.3、注入map集合类型-->
-        <property name="maps">
-            <map>
-                <entry key="username" value="陶渊明"/>
-                <entry key="password" value="采菊东篱下，悠然见南山"/>
-            </map>
-        </property>
+<!--        &lt;!&ndash;1.2、注入list集合类型&ndash;&gt;-->
+<!--        <property name="lists">-->
+<!--            <list>-->
+<!--                <value>李清照</value>-->
+<!--                <value>鱼幼薇</value>-->
+<!--                <value>蔡文姬</value>-->
+<!--            </list>-->
+<!--        </property>-->
 
-        <!--1.4、注入properties集合类型-->
-        <property name="properties">
-            <props>
-                <prop key="driverClass">破阵子</prop>
-                <prop key="url">辛弃疾</prop>
-                <prop key="username">醉里挑灯看剑，梦回吹角连营</prop>
-                <prop key="password">可怜白发生</prop>
-            </props>
-        </property>
-    </bean>
+<!--        &lt;!&ndash;1.3、注入map集合类型&ndash;&gt;-->
+<!--        <property name="maps">-->
+<!--            <map>-->
+<!--                <entry key="username" value="陶渊明"/>-->
+<!--                <entry key="password" value="采菊东篱下，悠然见南山"/>-->
+<!--            </map>-->
+<!--        </property>-->
+
+<!--        &lt;!&ndash;1.4、注入properties集合类型&ndash;&gt;-->
+<!--        <property name="properties">-->
+<!--            <props>-->
+<!--                <prop key="driverClass">破阵子</prop>-->
+<!--                <prop key="url">辛弃疾</prop>-->
+<!--                <prop key="username">醉里挑灯看剑，梦回吹角连营</prop>-->
+<!--                <prop key="password">可怜白发生</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    注解和配置文件混合使用：1、将Bean对象的创建交给配置文件；2、将属性注入交给注解-->
+    <bean id="userDao" class="com.hbnu.dao.UserDao"/>
+    <bean id="userService" class="com.hbnu.service.UserService"/>
+
+<!--    包扫描-->
+    <context:component-scan base-package="com.hbnu"/>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
