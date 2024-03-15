@@ -26,7 +26,9 @@ public class HibernateTest {
         user.setPassword("123456");
         user.setAddress("古代");
         user.setSalary(18000.00);
-        session.save(user);//通过调用session对象的相关方法操作数据库
+        session.save(user); // 通过调用session对象的相关方法操作数据库
+
+        session.delete(user);
 
 //        5、关闭
         session.close();
