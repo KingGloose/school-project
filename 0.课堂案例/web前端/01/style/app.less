@@ -1,0 +1,64 @@
+@import "tools";
+
+header {
+  .top_nav {
+    height: 3rem;
+    background-color: #ececec;
+    text-align: center;
+    line-height: 3rem;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  a {
+    color: #929292;
+    padding: 0 10px;
+    border-right: 1px solid #b1b1b1;
+  }
+  li {
+    float: left;
+  }
+  .left_nav {
+    li:last-of-type {
+      a {
+        border-right: 0 none;
+      }
+    }
+  }
+  .right_nav {
+    li:last-of-type {
+      a {
+        border-right: 0 none;
+      }
+      span {
+        color: #ff232d;
+      }
+    }
+  }
+}
+
+.top_search_container {
+  height: 8rem;
+  .container {
+    height: inherit;
+    .left_icon {
+      padding: 2rem;
+      border: none;
+    }
+    .search_container {
+      height: inherit;
+
+      .flexCenter();
+
+      input {
+        .toBlock(20rem,3rem);
+        border-color: orange;
+        padding: 0 1rem;
+      }
+
+      button {
+        .toBlock(3.5rem,3rem);
+        border-color: orange;
+      }
+    }
+  }
+}
