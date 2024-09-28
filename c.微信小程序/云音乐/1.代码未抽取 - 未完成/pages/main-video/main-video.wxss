@@ -1,0 +1,8 @@
+.mainVideo {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.mainVideo .item {
+  width: 47%;
+}

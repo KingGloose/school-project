@@ -1,0 +1,5 @@
+<scroll-view class="playLyric" style="height: {{ contentHeight }}px;" scroll-y scroll-with-animation scroll-top="{{ lyricScrollTop }}" enhanced="{{ true }}" show-scrollbar="{{ false }}" bindscroll="scrollEvent">
+  <block wx:for="{{ lyricData }}" wx:key="time">
+    <view class="item {{ currentLyricIndex === index ? 'active' : '' }}"> {{ item.text }} </view>
+  </block>
+</scroll-view>

@@ -1,0 +1,20 @@
+<wxs src="../../utils/format.wxs" module="format" />
+
+<view class="musicRanking" bindtap="musicRankingClick">
+  <view class="left">
+    <view class="title">{{ itemData.name }}</view>
+    <view class="content">
+      <block wx:for="{{ 3 }}" wx:key="*this">
+        <view class="item">
+          <text>{{ index + 1 }}.</text>
+          <text>{{ itemData.tracks[index].name }} - </text>
+          <text class="singer">{{ itemData.tracks[index].ar[0].name }}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="right">
+    <image class="image" src="{{ itemData.coverImgUrl }}" mode="widthFix" />
+    <view class="count">{{ format.formatPlayCount(itemData.playCount) }}</view>
+  </view>
+</view>

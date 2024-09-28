@@ -1,0 +1,13 @@
+<wxs src="../../utils/format.wxs" module="video"></wxs>
+
+<view class="videoRelated" bindtap="getItemIdTap">
+  <view class="left">
+    <image class="image" src="{{ RelatedItem.coverUrl }}" mode="widthFix" />
+    <view class="count">{{ video.formatPlayCount(RelatedItem.playTime) }}</view>
+  </view>
+
+  <view class="right">
+    <view class="name">{{ RelatedItem.title }}</view>
+    <view class="auther">{{ RelatedItem.creator[0].userName }}</view>
+  </view>
+</view>

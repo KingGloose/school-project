@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url("../../image/grid.png");
+}
+.main {
+  width: 200px;
+  height: 200px;
+
+  position: relative;
+  left: 0;
+  top: 0;
+
+  margin-left: 200px;
+  margin-top: 200px;
+}
+
+.inner {
+  position: absolute;
+
+  margin-left: 24px;
+  margin-top: 24px;
+
+  width: 50px;
+  height: 50px;
+
+  transform: rotateX(-33.5deg) rotateY(45deg);
+  transform-style: preserve-3d;
+
+  animation: inner-loop 6000ms ease-in-out infinite;
+}
+.outer {
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  transform: rotateX(-33.5deg) rotateY(45deg);
+  transform-style: preserve-3d;
+
+  animation: outer-loop 6000ms ease-in-out infinite;
+}
+@keyframes inner-loop {
+  0% {
+    transform: rotateX(-33.5deg) rotateY(45deg);
+  }
+  50%,
+  100% {
+    transform: rotateX(-33.5deg) rotateY(-315deg);
+  }
+}
+@keyframes outer-loop {
+  0% {
+    transform: rotateX(-33.5deg) rotateY(45deg);
+  }
+  50%,
+  100% {
+    transform: rotateX(-33.5deg) rotateY(405deg);
+  }
+}
+
+.item {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+/* 内部 */
+.inner .item {
+  background-color: #175d96;
+  border: 1px solid white;
+}
+.inner .top {
+  transform: rotateX(90deg) translateZ(25px);
+}
+.inner .bottom {
+  transform: rotateX(-90deg) translateZ(25px);
+}
+.inner .front {
+  transform: translateZ(25px);
+}
+.inner .back {
+  transform: rotateY(180deg) translateZ(25px);
+}
+.inner .right {
+  transform: rotateY(90deg) translateZ(25px);
+}
+.inner .left {
+  transform: rotateY(-90deg) translateZ(25px);
+}
+
+/* 外部 */
+.outer .item {
+  background-color: rgba(141, 214, 249, 0.5);
+  border: 1px solid white;
+}
+.outer .top {
+  transform: rotateX(90deg) translateZ(50px);
+}
+.outer .bottom {
+  transform: rotateX(-90deg) translateZ(50px);
+}
+.outer .front {
+  transform: translateZ(50px);
+}
+.outer .back {
+  transform: rotateY(180deg) translateZ(50px);
+}
+.outer .right {
+  transform: rotateY(90deg) translateZ(50px);
+}
+.outer .left {
+  transform: rotateY(-90deg) translateZ(50px);
+}

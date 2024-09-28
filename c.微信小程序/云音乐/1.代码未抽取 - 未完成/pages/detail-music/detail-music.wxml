@@ -1,0 +1,11 @@
+<view class="detailMusic">
+  <view class="header" wx:if="{{ type === 'menu' }}">
+    <menu-header songInfo="{{ musicList }}"></menu-header>
+  </view>
+  <view class="songlist">
+    <area-header wx:if="{{ type !== 'menu' }}" areaHeaderTitle="{{ musicList.name }}" hasMore="{{ false }}"></area-header>
+    <block wx:for="{{ musicList.tracks }}" wx:key="id">
+      <music-item itemData="{{ item }}" bind:musicItemClickEvent="musicItemClickEvent" data-index="{{ index }}"></music-item>
+    </block>
+  </view>
+</view>

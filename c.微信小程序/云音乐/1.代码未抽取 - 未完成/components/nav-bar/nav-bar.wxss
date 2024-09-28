@@ -1,0 +1,31 @@
+.navBar .control {
+  color: #fff;
+  display: flex;
+  /* height: 44px; */
+}
+.navBar .control .left,
+.navBar .control .right {
+  width: 120rpx;
+}
+.navBar .control .left .icon {
+  margin-top: 10rpx;
+}
+.navBar .control .center {
+  flex: 1;
+}
+.navBar .control .left,
+.navBar .control .right,
+.navBar .control .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 插槽控制 */
+.default {
+  display: none;
+}
+
+.slot:empty + .default {
+  display: flex;
+}

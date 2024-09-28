@@ -1,0 +1,33 @@
+.musicMenuList {
+  width: 100%;
+}
+.musicMenuList .top {
+  position: relative;
+}
+.musicMenuList .top .image {
+  width: 100%;
+  border-radius: 12rpx;
+}
+.musicMenuList .top .count {
+  position: absolute;
+  bottom: 10rpx;
+  right: 6rpx;
+
+  background-color: rgba(87, 96, 111, 0.7);
+  padding: 8rpx;
+  border-radius: 12rpx;
+
+  color: white;
+  font-size: 24rpx;
+}
+.musicMenuList .bottom {
+  width: 100%;
+  font-size: 26rpx;
+
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

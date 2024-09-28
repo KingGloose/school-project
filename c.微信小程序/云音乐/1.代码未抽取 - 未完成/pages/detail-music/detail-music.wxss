@@ -1,0 +1,4 @@
+.songlist {
+  padding: 0 20rpx;
+  margin-top: 40rpx;
+}

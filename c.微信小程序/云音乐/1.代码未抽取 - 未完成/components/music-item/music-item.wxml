@@ -1,0 +1,18 @@
+<view class="musicItem" bindtap="musicItemClick">
+  <view class="left">
+    <image class="image" src="{{ itemData.al.picUrl }}" mode="widthFix" />
+  </view>
+  <view class="right">
+    <view class="desc">
+      <view class="title">{{ itemData.name }}</view>
+      <view class="auther">
+        <block wx:for="{{ itemData.ar }}" wx:key="id">
+          <text>{{ item.name }}{{ itemData.ar.length - 1 === index ? "" : ","}}</text>
+        </block>
+      </view>
+    </view>
+    <view class="icon">
+      <van-icon name="arrow" />
+    </view>
+  </view>
+</view>

@@ -1,0 +1,18 @@
+page {
+  --search-background-color: #ecf0f1;
+  --search-padding: 10px 0px;
+}
+
+/* 轮播图样式 */
+.mainMusic {
+  padding: 0 20rpx;
+  padding-bottom: 20rpx;
+}
+.mainMusic .banner {
+  border-radius: 12rpx;
+  overflow: hidden;
+  height: 130px;
+}
+.mainMusic .banner .image {
+  width: 100%;
+}

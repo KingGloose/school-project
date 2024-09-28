@@ -1,0 +1,30 @@
+<wxs src="../../../../utils/format.wxs" module="format" />
+
+<view class="playDetail">
+  <view class="album">
+    <image class="image" src="{{ itemData.al.picUrl }}" mode="widthFix" />
+  </view>
+
+  <view class="info">
+    <view class="name">{{ itemData.name }}</view>
+    <view class="singer">{{ itemData.ar[0].name }}</view>
+  </view>
+
+  <view class="lyric"> {{ currentLyricText }} </view>
+
+  <view class="progress">
+    <slider class="slider" block-size="12" value="{{ sliderValue }}" bindchange="changeSliderHandler" bindchanging="changingSliderHandler"></slider>
+    <view class="time">
+      <view class="current">{{ format.formatVideoTime(currentTime) }}</view>
+      <view class="duration">{{ format.formatVideoTime(durationTime) }}</view>
+    </view>
+  </view>
+
+  <view class="controls">
+    <image class="btn mode" src="/assets/image/player/play_{{ playModeName }}.png" bindtap="playModeHandler" />
+    <image class="btn prev" src="/assets/image/player/play_prev.png" bindtap="playPrevHandler" />
+    <image class="btn play" src="/assets/image/player/play_{{ isPlaying ? 'pause' : 'resume' }}.png" bindtap="playBtnHandler" />
+    <image class="btn next" src="/assets/image/player/play_next.png" bindtap="playNextHandler" />
+    <image class="btn list" src="/assets/image/player/play_music.png" />
+  </view>
+</view>

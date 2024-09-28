@@ -1,0 +1,7 @@
+<view class="areaHeader">
+  <view class="left">{{ areaHeaderTitle }}</view>
+  <view class="right" bindtap="moreClick" wx:if="{{ hasMore }}">
+    <text>更多</text>
+    <van-icon name="arrow" />
+  </view>
+</view>

@@ -1,0 +1,5 @@
+<view class="mainVideo">
+  <block wx:for="{{ TopMvList }}" wx:key="id">
+    <videoItem class="item" itemData="{{ item }}"></videoItem>
+  </block>
+</view>

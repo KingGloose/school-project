@@ -1,0 +1,70 @@
+.playDetail {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: 100%;
+}
+
+/* 图片 */
+.playDetail .album {
+  flex: 1;
+}
+.playDetail .album .image {
+  width: 100%;
+  border-radius: 14rpx;
+}
+
+/* 信息 */
+.playDetail .info {
+  margin: 20rpx 0;
+}
+.playDetail .info .name {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.playDetail .info .singer {
+  margin-top: 10rpx;
+}
+
+/* 歌词 */
+.playDetail .lyric {
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  margin: 10rpx 0;
+  font-size: 26rpx;
+  text-align: center;
+}
+
+/* 进度条 */
+.playDetail .progress {
+  margin: 10rpx 0;
+}
+.playDetail .progress .slider {
+  margin: 0 15rpx 0 18rpx;
+}
+.playDetail .progress .time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+
+/* 控制栏 */
+.playDetail .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20rpx 0;
+}
+.playDetail .controls image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.playDetail .controls .mode {
+  width: 80rpx;
+  height: 80rpx;
+}
+.playDetail .controls .play {
+  width: 100rpx;
+  height: 100rpx;
+}

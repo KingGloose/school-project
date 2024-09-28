@@ -1,0 +1,9 @@
+<wxs src="../../utils/format.wxs" module="format" />
+
+<view class="musicMenuList" bindtap="menuItemClick">
+  <view class="top">
+    <image class="image" src="{{itemData.coverImgUrl}}" mode="widthFix" />
+    <view class="count">{{ format.formatPlayCount(itemData.playCount) }}</view>
+  </view>
+  <view class="bottom"> {{ itemData.name }}</view>
+</view>

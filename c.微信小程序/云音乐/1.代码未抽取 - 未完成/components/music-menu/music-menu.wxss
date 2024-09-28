@@ -1,0 +1,15 @@
+.Menu {
+  height: 410rpx;
+}
+.Menu .list {
+  display: flex;
+  margin-left: -20rpx;
+}
+.Menu .list .item {
+  width: 240rpx;
+  flex-shrink: 0;
+  margin-left: 24rpx;
+}
+.Menu .list .item:last-child {
+  padding-right: 24rpx;
+}

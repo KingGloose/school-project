@@ -1,0 +1,15 @@
+.areaHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 36rpx 0;
+}
+.areaHeader .left {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.areaHeader .right {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #666;
+}

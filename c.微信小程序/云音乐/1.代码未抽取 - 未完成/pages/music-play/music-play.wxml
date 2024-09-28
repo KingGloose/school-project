@@ -1,0 +1,47 @@
+<view class="musicPlay">
+  <image class="image__bgimg" src="{{ detail.al.picUrl }}" mode="aspectFill" />
+  <view class="view__bgFilter"></view>
+
+  <!-- nav-bar -->
+  <nav-bar>
+    <view class="bar" slot="center">
+      <view class="left {{ currentIndex === 0 ? 'active' : '' }}" bindtap="barChangeClick" data-index="{{ 0 }}">歌曲</view>
+      <view class="center">|</view>
+      <view class="right {{ currentIndex === 1 ? 'active' : '' }}" bindtap="barChangeClick" data-index="{{ 1 }}">歌词</view>
+    </view>
+  </nav-bar>
+
+  <!-- 歌曲显示 -->
+  <swiper 
+    class="content" 
+    style="height: {{ contentHeight - navbarTopPadding - navbarBottomPadding }}px; padding: {{ navbarTopPadding }}px 30px {{ navbarBottomPadding }}px 30px;"
+    current="{{ currentIndex }}"
+    bindchange="barchangeHandler" 
+  >
+    <swiper-item class="playdetail">
+      <play-detail 
+        itemData="{{ detail }}" 
+        contentHeight="{{ contentHeight }}" 
+        currentTime="{{ currentTime }}" 
+        durationTime="{{ durationTime }}" 
+        sliderValue="{{  sliderValue }}"
+        currentLyricText="{{ currentLyricText }}"
+        bind:changeSliderEvent="changeSliderEvent" 
+        bind:changingSliderEvent="changingSliderEventThrottle" 
+        bind:playBtnEvent="playBtnEvent"
+        bind:playPrevEvent="playPrevEvent"
+        bind:playNextEvent="playNextEvent"
+        bind:playModeEvent="playModeEvent"
+      ></play-detail>
+    </swiper-item>
+    <swiper-item>
+      <play-lyric 
+        lyricData="{{ lyric }}"
+        currentLyricIndex="{{ currentLyricIndex }}"
+        contentHeight="{{ contentHeight }}"
+        lyricScrollTop="{{ lyricScrollTop }}"
+        currentLyricIndex="{{ currentLyricIndex }}"
+      ></play-lyric>
+    </swiper-item>
+  </swiper>
+</view>

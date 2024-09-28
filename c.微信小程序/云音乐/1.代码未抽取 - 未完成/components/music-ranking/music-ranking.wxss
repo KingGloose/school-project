@@ -1,0 +1,48 @@
+.musicRanking {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  border-radius: 12rpx;
+  background-color: #ececec;
+
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+.musicRanking .left {
+  padding: 20rpx;
+  overflow: hidden;
+}
+.musicRanking .left .title {
+  margin-bottom: 18rpx;
+  font-size: 30rpx;
+}
+.musicRanking .left .content {
+  font-size: 27rpx;
+}
+.musicRanking .left .content .item {
+  margin-top: 8rpx;
+}
+
+.musicRanking .right {
+  width: 270rpx;
+  height: 270rpx;
+  position: relative;
+}
+.musicRanking .right .image {
+  width: 270rpx;
+}
+.musicRanking .right .count {
+  position: absolute;
+  z-index: 9;
+  right: 4rpx;
+  bottom: 10rpx;
+
+  background-color: rgba(87, 96, 111, 0.7);
+  padding: 8rpx;
+  border-radius: 10rpx;
+
+  color: white;
+  font-size: 24rpx;
+}

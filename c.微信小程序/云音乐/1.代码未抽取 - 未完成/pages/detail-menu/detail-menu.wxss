@@ -1,0 +1,11 @@
+.detailMenu {
+  padding: 0 20rpx;
+}
+.detailMenu .item .content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.detailMenu .item .content .menuItem {
+  width: 48%;
+}

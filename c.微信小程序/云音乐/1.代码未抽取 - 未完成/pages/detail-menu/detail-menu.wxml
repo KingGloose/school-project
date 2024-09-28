@@ -1,0 +1,14 @@
+<view class="detailMenu">
+  <block wx:for="{{ musicMenu }}" wx:key="id">
+    <view class="item">
+      <view class="title">
+        <area-header areaHeaderTitle="{{ item.cat }}" hasMore="{{false}}"></area-header>
+      </view>
+      <view class="content">
+        <block wx:for="{{ item.playlists }}" wx:for-item="data" wx:key="id">
+          <music-menu-item class="menuItem" itemData="{{ data }}"></music-menu-item>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

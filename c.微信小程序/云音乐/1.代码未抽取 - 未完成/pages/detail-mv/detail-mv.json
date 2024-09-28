@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "videoRelated": "../../components/mv-related/mv-related"
+  }
+}

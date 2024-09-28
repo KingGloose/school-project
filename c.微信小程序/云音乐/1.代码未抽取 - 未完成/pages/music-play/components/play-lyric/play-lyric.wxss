@@ -1,0 +1,22 @@
+.playLyric {
+  color: #aaa;
+  font-size: 30rpx;
+  height: 100%;
+  text-align: center;
+}
+
+.playLyric .item {
+  padding: 10px 0;
+}
+.playLyric .item.active {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.playLyric .item:first-of-type {
+  padding-top: 400rpx;
+}
+.playLyric .item:last-of-type {
+  padding-bottom: 600rpx;
+}

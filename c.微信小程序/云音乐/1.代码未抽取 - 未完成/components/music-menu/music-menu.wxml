@@ -1,0 +1,10 @@
+<view class="Menu">
+  <area-header areaHeaderTitle="{{ title }}" bind:moreClickEvent="menuMoreClickEvent"></area-header>
+  <view class="scroll">
+    <scroll-view scroll-x enable-flex enhanced="{{ true }}" show-scrollbar="{{ false }}" class="list" style="width: {{ screenWidth }}px;">
+      <block wx:for="{{ itemData }}" wx:key="id">
+        <music-menu-item class="item" itemData="{{item}}"></music-menu-item>
+      </block>
+    </scroll-view>
+  </view>
+</view>

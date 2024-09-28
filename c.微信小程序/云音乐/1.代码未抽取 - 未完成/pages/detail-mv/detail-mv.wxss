@@ -1,0 +1,32 @@
+.detailVideo {
+  height: 100vh;
+}
+.detailVideo .video {
+  width: 100%;
+}
+.detailVideo .info {
+  padding: 10px;
+}
+.detailVideo .info .name {
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.detailVideo .info .auther {
+  padding: 5px 0;
+}
+.detailVideo .info .text {
+  font-size: 26rpx;
+  color: #636e72;
+}
+
+.detailVideo .related {
+  padding: 10px;
+}
+.detailVideo .related .title {
+  font-size: 36rpx;
+  margin-bottom: 30rpx;
+}
+
+.relatedContent {
+  height: calc(100% - 225px);
+}

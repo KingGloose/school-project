@@ -1,0 +1,33 @@
+.musicItem {
+  display: flex;
+  padding: 8rpx 0;
+}
+.musicItem .left .image {
+  border-radius: 16rpx;
+  width: 120rpx;
+}
+
+.musicItem .right {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.musicItem .right .desc {
+  margin-left: 20rpx;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.musicItem .right .desc .title {
+  font-size: 32rpx;
+}
+.musicItem .right .desc .auther text {
+  font-size: 26rpx;
+  color: #747d8c;
+}
+.musicItem .right .icon {
+  display: flex;
+  align-items: center;
+  color: #747d8c;
+}
